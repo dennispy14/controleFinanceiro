@@ -100,23 +100,21 @@ public class UsuarioServiceTest {
 
     @Test
     public void deveLancarErrorQuandoSenhaNaoBater(){
-        //cenario
+        // cenário
         String senha = "senha";
         Usuario usuario = Usuario.builder().email("email@email.com").senha(senha).build();
         Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
 
-        //acao
-        Throwable exception = Assertions.c
-    }
-    /*@Test
-    public void deveValidarQuandoNaoAUmEmail(){
-        //Cenário
-        repository.deleteAll();
-        //ação
+        // ação e verificação
+        ErroAutenticacao exception = Assertions.assertThrows(ErroAutenticacao.class, () -> {
+            service.autenticar("email@email.com", "123");
+        }, "Deveria lançar ErroAutenticacao");
 
-        //verificação
-        Assertions.assertThrows(RegraNegocioException.class, () -> service.validarEmail("email@email.com"));
-    }*/
+        Assertions.assertEquals("Senha inválida.", exception.getMessage(), "Mensagem de erro diferente do esperado");
+
+        // Verifica se o método findByEmail foi chamado com qualquer string
+        Mockito.verify(repository).findByEmail(Mockito.anyString());
+    }
 
     @Test
     public void deveValidarQuandoAUmEmail(){
