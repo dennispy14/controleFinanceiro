@@ -5,10 +5,6 @@ import com.dennispy.controleFinanceiro.exception.ErroAutenticacao;
 import com.dennispy.controleFinanceiro.exception.RegraNegocioException;
 import com.dennispy.controleFinanceiro.model.entity.Usuario;
 import com.dennispy.controleFinanceiro.model.repository.UsuarioRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

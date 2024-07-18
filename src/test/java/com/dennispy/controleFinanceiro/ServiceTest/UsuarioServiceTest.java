@@ -106,7 +106,7 @@ public class UsuarioServiceTest {
         Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
 
         //acao
-        Throwable exception = Assertions.c
+        //Throwable exception = Assertions.c
     }
     /*@Test
     public void deveValidarQuandoNaoAUmEmail(){
