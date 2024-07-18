@@ -18,6 +18,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -33,7 +35,7 @@ public class UsuarioServiceTest {
         //cenario
         Mockito.doNothing().when(service).validarEmail(Mockito.anyString());
         Usuario usuario = Usuario.builder()
-                .id(11)
+                .id(1)
                 .nome("Dennis")
                 .email("email@email.com")
                 .senha("senha")
@@ -47,7 +49,7 @@ public class UsuarioServiceTest {
         //verificacao
         Assertions.assertNotNull(usuarioSalvo, "The saved user should not be null");
         Assertions.assertEquals(1, usuarioSalvo.getId(), "The user ID should be 1");
-        Assertions.assertEquals("nome", usuarioSalvo.getNome(), "The user name should be 'nome'");
+        Assertions.assertEquals("Dennis", usuarioSalvo.getNome(), "The user name should be 'nome'");
         Assertions.assertEquals("email@email.com", usuarioSalvo.getEmail(), "The user email should be 'email@email.com'");
         Assertions.assertEquals("senha", usuarioSalvo.getSenha(), "The user password should be 'senha'");
 
@@ -61,7 +63,9 @@ public class UsuarioServiceTest {
         Mockito.doThrow(RegraNegocioException.class).when(service).validarEmail(email);
 
         //acao
-        service.salvarUsuario(usuario);
+        assertThrows(RegraNegocioException.class, () -> {
+            service.salvarUsuario(usuario);
+        });
 
         //verificacao
         Mockito.verify(repository, Mockito.never()).save(usuario);
@@ -88,11 +92,11 @@ public class UsuarioServiceTest {
         Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.empty());
 
         // ação e verificação
-        ErroAutenticacao exception = Assertions.assertThrows(ErroAutenticacao.class, () -> {
+        ErroAutenticacao exception = assertThrows(ErroAutenticacao.class, () -> {
             service.autenticar("email@email.com", "senha");
         }, "Deveria lançar ErroAutenticacao");
 
-        Assertions.assertEquals("Usuário não encontrado para o email informado.", exception.getMessage(), "Mensagem de erro diferente do esperado");
+        Assertions.assertEquals("Usuário não encontrado para o email informado!", exception.getMessage(), "Mensagem de erro diferente do esperado");
 
         // Verifica se o método findByEmail foi chamado com qualquer string
         Mockito.verify(repository).findByEmail(Mockito.anyString());
@@ -100,23 +104,22 @@ public class UsuarioServiceTest {
 
     @Test
     public void deveLancarErrorQuandoSenhaNaoBater(){
-        //cenario
+        // cenário
         String senha = "senha";
         Usuario usuario = Usuario.builder().email("email@email.com").senha(senha).build();
         Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
 
-        //acao
-        //Throwable exception = Assertions.c
-    }
-    /*@Test
-    public void deveValidarQuandoNaoAUmEmail(){
-        //Cenário
-        repository.deleteAll();
-        //ação
+        // ação e verificação
+        ErroAutenticacao exception = assertThrows(ErroAutenticacao.class, () -> {
+            service.autenticar("email@email.com", "123");
+        }, "Deveria lançar ErroAutenticacao");
 
-        //verificação
-        Assertions.assertThrows(RegraNegocioException.class, () -> service.validarEmail("email@email.com"));
-    }*/
+        Assertions.assertEquals("Senha inválida.", exception.getMessage(), "Mensagem de erro diferente do esperado");
+
+        // Verifica se o método findByEmail foi chamado com qualquer string
+        Mockito.verify(repository).findByEmail(Mockito.anyString());
+
+    }
 
     @Test
     public void deveValidarQuandoAUmEmail(){
