@@ -118,6 +118,7 @@ public class UsuarioServiceTest {
 
         // Verifica se o método findByEmail foi chamado com qualquer string
         Mockito.verify(repository).findByEmail(Mockito.anyString());
+
     }
 
     @Test
