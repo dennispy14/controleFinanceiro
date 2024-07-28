@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/usuarios")
 public interface UsuarioApi {
 
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    // @PreAuthorize("@securityService.hasPermission('pessoaApi_findByDocumento')")
-    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UsuarioDto> salvar(@RequestBody UsuarioDto dto);
 }

@@ -1,14 +1,13 @@
 package com.dennispy.controleFinanceiro.ServiceTest;
 
-import com.dennispy.controleFinanceiro.Service.UsuarioService;
+import com.dennispy.controleFinanceiro.domain.usuario.model.Usuario;
+import com.dennispy.controleFinanceiro.domain.usuario.service.UsuarioService;
 import com.dennispy.controleFinanceiro.exception.ErroAutenticacao;
 import com.dennispy.controleFinanceiro.exception.RegraNegocioException;
-import com.dennispy.controleFinanceiro.model.entity.Usuario;
-import com.dennispy.controleFinanceiro.model.repository.UsuarioRepository;
+import com.dennispy.controleFinanceiro.domain.usuario.repository.UsuarioRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

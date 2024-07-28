@@ -1,10 +1,10 @@
-package com.dennispy.controleFinanceiro.Service;
+package com.dennispy.controleFinanceiro.domain.usuario.service;
 
-import com.dennispy.controleFinanceiro.components.Messages;
+import com.dennispy.controleFinanceiro.domain.usuario.model.Usuario;
 import com.dennispy.controleFinanceiro.exception.ErroAutenticacao;
 import com.dennispy.controleFinanceiro.exception.RegraNegocioException;
-import com.dennispy.controleFinanceiro.model.entity.Usuario;
-import com.dennispy.controleFinanceiro.model.repository.UsuarioRepository;
+
+import com.dennispy.controleFinanceiro.domain.usuario.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,9 +14,6 @@ import java.util.Optional;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-
-    /*@Autowired
-    private final Messages messages;*/
 
     public UsuarioService(UsuarioRepository repository) {
         super();

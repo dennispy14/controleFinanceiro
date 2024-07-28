@@ -1,6 +1,6 @@
 package com.dennispy.controleFinanceiro.api.usuarioResource.controller;
 
-import com.dennispy.controleFinanceiro.Service.UsuarioService;
+import com.dennispy.controleFinanceiro.domain.usuario.service.UsuarioService;
 import com.dennispy.controleFinanceiro.api.usuarioResource.dto.UsuarioDto;
 import com.dennispy.controleFinanceiro.api.usuarioResource.mapper.UsuarioMapper;
 import lombok.AllArgsConstructor;
@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UsuarioApiImp implements UsuarioApi{
 
+
     private final UsuarioService service;
     private final UsuarioMapper mapper;
     @Override
     public ResponseEntity<UsuarioDto> salvar(@RequestBody UsuarioDto dto) {
         return ResponseEntity.ok(mapper.toDto(service.salvarUsuario(mapper.toEntity(dto))));
+
     }
 }

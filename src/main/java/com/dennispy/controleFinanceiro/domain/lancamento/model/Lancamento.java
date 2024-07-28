@@ -1,7 +1,8 @@
-package com.dennispy.controleFinanceiro.model.entity;
+package com.dennispy.controleFinanceiro.domain.lancamento.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,11 +13,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Table
+@Builder
 public class Lancamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "desc")
     private String descricao;
     @Column(name = "ano")

@@ -1,4 +1,4 @@
-package com.dennispy.controleFinanceiro.model.entity;
+package com.dennispy.controleFinanceiro.domain.usuario.model;
 
 
 import jakarta.persistence.*;

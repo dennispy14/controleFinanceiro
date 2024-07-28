@@ -1,4 +1,4 @@
-package com.dennispy.controleFinanceiro.model.enums;
+package com.dennispy.controleFinanceiro.components.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

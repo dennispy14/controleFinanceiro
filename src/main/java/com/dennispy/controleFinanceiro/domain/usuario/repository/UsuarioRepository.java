@@ -1,6 +1,6 @@
-package com.dennispy.controleFinanceiro.model.repository;
+package com.dennispy.controleFinanceiro.domain.usuario.repository;
 
-import com.dennispy.controleFinanceiro.model.entity.Usuario;
+import com.dennispy.controleFinanceiro.domain.usuario.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
